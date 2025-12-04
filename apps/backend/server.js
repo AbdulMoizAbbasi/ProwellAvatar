@@ -13,10 +13,10 @@ dotenv.config();
 
 const app = express();
 app.use(express.json());
+
+// Enable CORS so your separate Frontend can talk to this Backend
 app.use(cors());
 
-// Serve static files from the frontend build directory
-app.use(express.static(path.join(__dirname, "../frontend/dist")));
 const port = process.env.PORT || 3000;
 
 // Helper function to select animation based on message content
@@ -163,10 +163,9 @@ app.post("/sts", async (req, res) => {
   }
 });
 
-// Catch-all route to serve the frontend index.html for any non-API requests
-app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname, "../frontend/dist/index.html"));
-});
+// ❌ REMOVED: app.use(express.static(...))
+// ❌ REMOVED: app.get("*", ...) 
+// We do not serve frontend files here because they are deployed separately!
 
 app.listen(port, () => {
   console.log(`Jack is listening on port ${port}`);
