@@ -1,5 +1,6 @@
 import { createContext, useContext, useEffect, useRef, useState } from "react";
 
+// ✅ Updated environment variable key to VITE_API_URL
 const backendUrl = import.meta.env.VITE_API_URL || "http://localhost:3000";
 
 const SpeechContext = createContext();
